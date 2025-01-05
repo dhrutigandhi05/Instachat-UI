@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Join from './login';
+import Join from './join';
 
 function App() {
   const [nickname, setNickname] = useState("");
