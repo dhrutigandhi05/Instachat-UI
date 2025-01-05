@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Join from './login';
 
 function App() {
+  const [nickname, setNickname] = useState("");
+
+  if (nickname === "") {
+    return <Join />
+  }
+
   return (
     <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
       <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
