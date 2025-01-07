@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Join from './join';
 
 function App() {
-  const [nickname, setNickname] = useState("");
+  const [nickname, setNickname] = useState(window.localStorage.getItem("nickname") || "");
+  useEffect(() => {window.localStorage.setItem("nickname", nickname)})
 
   if (nickname === "") {
-    return <Join />
+    return <Join setNickname={setNickname}/>
   }
 
   return (
