@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useRef, useState } from 'react';
+//import logo from './logo.svg';
 import './App.css';
 import Join from './join';
+import WSConnector from './WSConnector';
+
+const wsConnector = new WSConnector();
 
 function App() {
   const [nickname, setNickname] = useState(window.localStorage.getItem("nickname") || "");
-  useEffect(() => {window.localStorage.setItem("nickname", nickname)})
+  useEffect(() => {window.localStorage.setItem("nickname", nickname)});
+
+  const wsConnectortRef = useRef(wsConnector);
 
   if (nickname === "") {
     return <Join setNickname={setNickname}/>
   }
+
+  const url = `wss://hnr10uqox5.execute-api.us-east-1.amazonaws.com/dev?$nickname=${nickname}`
+  const ws = wsConnectortRef.current.getConnection(url);
+  
 
   return (
     <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
