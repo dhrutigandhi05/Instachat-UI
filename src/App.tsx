@@ -4,6 +4,7 @@ import './App.css';
 import Join from './join';
 import WSConnector from './WSConnector';
 import Convo from './convo';
+import Bar from './Bar';
 
 type Client = {
   connectionId: string;
@@ -39,9 +40,15 @@ function App() {
     };
   };
   
-
   return (
-    <Convo />
+    <div className="flex">
+      <div className="flex-none w-15 md:w-40 border-r-2">
+        <Bar />
+      </div>
+      <div className="flex-auto">
+        <Convo />
+      </div> 
+    </div>
   );
 }
 
