@@ -12,6 +12,7 @@ export type Client = {
   nickname: string;
 };
 
+const WS_URL = "wss://hnr10uqox5.execute-api.us-east-1.amazonaws.com/dev";
 const wsConnector = new WSConnector();
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
     return <Join setNickname={setNickname}/>;
   }
 
-  const url = `wss://hnr10uqox5.execute-api.us-east-1.amazonaws.com/dev?$nickname=${nickname}`;
+  const url = `${WS_URL}$nickname=${nickname}`;
   const ws = wsConnectortRef.current.getConnection(url);
   ws.onopen = () => {
     ws.send(JSON.stringify({
@@ -48,7 +49,7 @@ function App() {
   return (
     <div className="flex">
       <div className="flex-none w-15 md:w-40 border-r-2">
-        <Bar clients={clients} />
+        <Bar clients={clients} setTargetNickname={setTargetNickname}/>
       </div>
       <div className="flex-auto">
         <Convo />

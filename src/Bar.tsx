@@ -1,7 +1,12 @@
 import React from "react";
 import { Client } from "./App";
 
-const Bar = ({ clients }: {clients: Client[]}) => {
+const Bar = ({
+    clients,
+    setTargetNickname }: {
+    clients: Client[], 
+    setTargetNickname: (nickname: string) => void;
+}) => {
     return (
         <div className="flex flex-col md:ml-3">
             <div className="flex justify-center mt-12 mb-10 md:mr-3">
@@ -16,7 +21,7 @@ const Bar = ({ clients }: {clients: Client[]}) => {
             </div>
             <div className="flex flex-col items-center md:items-start">
                 {clients.map((client) => (
-                    <button >
+                    <button onClick={() => setTargetNickname(client.nickname)}>
                         <div className="flex mb-3">
                             <img 
                                 src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" 
