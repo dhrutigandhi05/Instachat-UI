@@ -18,7 +18,7 @@ const wsConnector = new WSConnector();
 function App() {
   const [nickname, setNickname] = useState(window.localStorage.getItem("nickname") || "");
   const [clients, setClients] = useState<Client[]>([]);
-  const [targetNickname, setTargetNickname] = useState("");
+  const [targetNicknameValue, setTargetNicknameValue] = useState("");
   
   useEffect(() => {window.localStorage.setItem("nickname", nickname)});
   const wsConnectortRef = useRef(wsConnector);
@@ -29,6 +29,7 @@ function App() {
 
   const url = `${WS_URL}$nickname=${nickname}`;
   const ws = wsConnectortRef.current.getConnection(url);
+
   ws.onopen = () => {
     ws.send(JSON.stringify({
       action: "getClients",
@@ -44,6 +45,16 @@ function App() {
     };
 
     setClients(message.value.clients);
+  };
+
+  const setTargetNickname = (nickname: string) => {
+    ws.send(JSON.stringify({
+      action: "getMessage",
+      targetNickname: nickname,
+      limit: 1000,
+    }));
+
+    setTargetNicknameValue(nickname);
   };
   
   return (

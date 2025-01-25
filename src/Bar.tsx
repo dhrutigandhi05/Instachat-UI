@@ -3,7 +3,8 @@ import { Client } from "./App";
 
 const Bar = ({
     clients,
-    setTargetNickname }: {
+    setTargetNickname 
+}: {
     clients: Client[], 
     setTargetNickname: (nickname: string) => void;
 }) => {
@@ -28,7 +29,7 @@ const Bar = ({
                                 alt=""  
                                 className="w-8 h-8 rounded-full mr-1.5"
                             />
-                            <span className="text-sm leading-8 hidden md:block">
+                            <span className="text-sm leading-8 invisible md:visible w-0 md:w-auto">
                                 {client.nickname}
                             </span>
                         </div>
